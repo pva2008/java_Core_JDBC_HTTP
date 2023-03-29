@@ -1,4 +1,4 @@
-package com.vpdev.oop.Lesson6.Lesson6Runner;
+package com.vpdev.oop.lesson6;
 
 import com.vpdev.oop.lesson2.Computer;
 
