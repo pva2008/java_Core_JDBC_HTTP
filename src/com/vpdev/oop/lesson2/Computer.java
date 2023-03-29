@@ -5,12 +5,12 @@ public class Computer {
     private int ssd = 500;
     private long ram;
 
-    Computer(int newSsd) {
+    protected Computer(int newSsd) {
         ssd = newSsd;
         ram = 999;
     }
 
-    protected Computer(int ssd, long newRam) {
+    public Computer(int ssd, long newRam) {
         this.ssd = ssd;
         ram = newRam;
     }

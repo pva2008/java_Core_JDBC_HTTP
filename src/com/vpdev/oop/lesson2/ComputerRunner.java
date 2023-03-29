@@ -10,5 +10,6 @@ public class ComputerRunner {
 
         Computer computer3 = new Computer(10000, 10000);
         computer3.printState();
+        computer3.load(true);
     }
 }
