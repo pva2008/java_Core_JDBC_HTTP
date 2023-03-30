@@ -12,8 +12,7 @@ package com.vpdev.oop.lesson8;
 public class TimeIntervalRunner {
 
     public static void main(String[] args) {
-        TimeInterval timeInterval = new TimeInterval(30, 2, 1);
-        System.out.println(timeInterval.totalSeconds());
+        TimeInterval timeInterval = CreateTimeInterval();
 
         TimeInterval timeInterval2 = new TimeInterval(timeInterval.totalSeconds());
         System.out.println(timeInterval2.totalSeconds());
@@ -21,5 +20,11 @@ public class TimeIntervalRunner {
 
         TimeInterval sumIntervals = timeInterval.sum(timeInterval2);
         sumIntervals.print();
+    }
+
+    private static TimeInterval CreateTimeInterval() {
+        TimeInterval timeInterval = new TimeInterval(30, 2, 1);
+        System.out.println(timeInterval.totalSeconds());
+        return timeInterval;
     }
 }
