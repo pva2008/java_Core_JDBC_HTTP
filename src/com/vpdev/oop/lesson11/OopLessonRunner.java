@@ -1,17 +1,40 @@
 package com.vpdev.oop.lesson11;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class OopLessonRunner {
 
     public static void main(String[] args) {
-        Ram ram = new Ram(1024);
-        Ssd ssd = new Ssd(500);
-        Computer computer = new Computer(ssd, ram);
-        computer.load();
+        double value = 2.5;
+        int intValue = (int) value;
 
-        Laptop laptop = new Laptop(new Ssd(250), new Ram(512), 2);
-        laptop.open();
-        laptop.load();
-        System.out.println(laptop);
+        Computer laptop = new Laptop(new Ssd(250), new Ram(1024), 2);
+        Computer mobile = new Mobile(new Ssd(125), new Ram(512));
+
+        Laptop laptop1 = new Laptop(new Ssd(5000), new Ram(10000), 5);
+
+//        loadComputers(laptop, mobile);
+        printInformation(new Computer[]{laptop, mobile, laptop1});
+    }
+
+    public static void printInformation(Computer[] computers) {
+        for (Computer computer : computers) {
+            computer.print();
+            if (computer instanceof Laptop) {
+                Laptop laptop = (Laptop) computer;
+                laptop.open();
+            }
+            System.out.println();
+        }
+    }
+
+    public static void loadComputers(Computer... computers) {
+        for (Computer computer : computers) {
+            computer.load();
+            System.out.println();
+        }
     }
 }

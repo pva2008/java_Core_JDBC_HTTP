@@ -1,31 +1,20 @@
 package com.vpdev.oop.lesson11;
 
 
-public class Computer {
+public abstract class Computer {
 
     private Ssd ssd;
     private Ram ram;
 
-    {
-        System.out.println("init block computer");
-    }
-
-    static {
-        System.out.println("static block computer");
-    }
-
     public Computer(Ssd ssd, Ram ram) {
-        super();
         this.ssd = ssd;
         this.ram = ram;
     }
 
-    public Computer() {
-        System.out.println("Constructor computer");
-    }
+    public abstract void load();
 
-    public void load() {
-        System.out.println("Я загрузился");
+    public void print() {
+        System.out.println("Ssd " + ssd.getValue() + ", ram: " + ram.getValue());
     }
 
     public Ssd getSsd() {
