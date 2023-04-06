@@ -5,19 +5,32 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 public class StreamTest {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
+        List<String> listString = new ArrayList<>();
         Integer[] array;
-        list.add("Dima");
-        list.add("Sveta");
-        list.add("Valera");
-        list.add("Olya");
+        listString.add("Dima");
+        listString.add("Sveta");
+        listString.add("Valera");
+        listString.add("Olya");
+
+        List<Integer> listInteger = new ArrayList<>();
+
+        listInteger.add(1);
+        listInteger.add(2);
+        listInteger.add(6);
+        listInteger.add(1);
 
         Map<Student, String> mapStudents = new HashMap<>();
         mapStudents.put(new Student(12, "Valera", 5.7), "Value");
         mapStudents.put(new Student(13, "Valera", 5.7), "Value");
         mapStudents.put(new Student(14, "Valera", 5.8), "Value");
+
+        Map<Integer, String> mapIntegers = new HashMap<>();
+        mapIntegers.put(12, "Value1");
+        mapIntegers.put(13, "Value2");
+        mapIntegers.put(15, "Value3");
 
 
 //---------------------------------------map--------------------------------------------------------------------
@@ -51,8 +64,24 @@ public class StreamTest {
 //        mapStudents.entrySet().stream().filter(element->element.getKey().getId()==12)
 //                .forEach(System.out::println   );// просто вызов метода из класса
 //------------------------------------Stream Create-----------------------------------------------------------------------------
-        Stream<Map<Student, String>> mapStream = Stream.of(mapStudents);
-        mapStream.forEach(e -> System.out.println(e));
+//        Stream<Map<Student, String>> mapStream = Stream.of(mapStudents);
+//        mapStream.forEach(e -> System.out.println(e));
+// ------------------------------------reduce-----------------------------------------------------------------------------
+//        Optional<Integer> o =  listInteger.stream().reduce((accumulator,element)->(accumulator+element));
+//        if(o.isPresent())
+//        System.out.println(o.get());
+
+        //при использовании Identity он уже возвращает не Optional<String>
+//        System.out.println(listString.stream().reduce("Value",(accumulator, element)->(accumulator+element)));
+//        //Optional<String> - тип возвращаемого, с которого до гет нужно проверить, тк может оказаться null
+//        Optional<String> o =  listString.stream().reduce((accumulator,element)->(accumulator+element));
+//        if(o.isPresent())
+//        System.out.println(o.get());
+// ------------------------------------sorted-----------------------------------------------------------------------------
+
+
+        //  mapIntegers.entrySet().stream().reduce((a,e)->(a.getKey()+e.getKey())).get().getKey();
+
 
     }
 }
