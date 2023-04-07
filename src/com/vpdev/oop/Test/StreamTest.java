@@ -81,6 +81,9 @@ public class StreamTest {
 
 
         //  mapIntegers.entrySet().stream().reduce((a,e)->(a.getKey()+e.getKey())).get().getKey();
+        listInteger.iterator().forEachRemaining(System.out::println);
+        System.out.println();
+        listInteger.stream().forEach(System.out::println);
 
 
     }
