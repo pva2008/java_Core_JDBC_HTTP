@@ -1,10 +1,7 @@
 package com.vpdev.oop.Test;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class ComparableAndComparatorAndBinarySearchTest {
     public static void main(String[] args) {
@@ -13,6 +10,8 @@ public class ComparableAndComparatorAndBinarySearchTest {
         books.add(new Book(3, new Ink("Green"), new Paper("AYellow")));
         books.add(new Book(2, new Ink("Blue"), new Paper("CMaroon")));
         books.add(new Book(5, new Ink("Green"), new Paper("BRed")));
+
+        Map<Integer, Book> booksMap = new TreeMap<>(Comparator.naturalOrder());
 
         for (Book book : books) {
             System.out.println(book);
