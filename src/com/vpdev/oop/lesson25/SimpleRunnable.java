@@ -4,6 +4,8 @@ public class SimpleRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Hello from runnable: " + Thread.currentThread().getName());
+        //Thread.currentThread().setName("Thread_SimpleRunnable");
+        System.out.println("Hello " + Thread.currentThread().getName());
+//        System.out.println("Hello " + getName());
     }
 }
