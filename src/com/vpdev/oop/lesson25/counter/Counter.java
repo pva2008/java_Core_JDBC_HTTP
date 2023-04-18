@@ -18,7 +18,10 @@ public class Counter {
     private int count;
 
     public void increment() {
-        count++;
+        synchronized (this) {
+            count++;
+        }
+
     }
 
     public void decrement() {
