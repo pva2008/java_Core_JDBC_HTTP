@@ -3,17 +3,17 @@ package com.vpdev.oop.lesson25.queue;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Semaphore;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CashboxRunner {
 
     public static void main(String[] args) throws InterruptedException {
-        Queue<Cashbox> cashboxes = new ArrayDeque<>(List.of(new Cashbox(), new Cashbox()));
-//        System.out.println(cashboxes.poll());
-//        System.out.println(cashboxes.poll());
-//        System.out.println(cashboxes.poll());
-
+//        BlockingQueue<Cashbox> cashboxes = new ArrayBlockingQueue<>(2, true, List.of(new Cashbox(), new Cashbox()));
+        Semaphore cashboxes = new Semaphore(2);
         List<Thread> threads = Stream.of(
                         new BuyerThread(cashboxes),
                         new BuyerThread(cashboxes),
@@ -26,8 +26,6 @@ public class CashboxRunner {
                 )
                 .map(Thread::new)
                 .peek(Thread::start)
-                //.map(Thread::new)
-                // .peek(Thread::start)
                 .collect(Collectors.toList());
 
         for (Thread thread : threads) {
