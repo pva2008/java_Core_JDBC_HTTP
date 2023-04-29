@@ -1,4 +1,4 @@
-package com.vpdev.oop.Test;
+package com.vpdev.oop.test;
 
 import java.util.*;
 

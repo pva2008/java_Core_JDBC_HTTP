@@ -1,9 +1,7 @@
-package com.vpdev.oop.Test;
+package com.vpdev.oop.test;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 
 public class MapTest {
     public static void main(String[] args) {

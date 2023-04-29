@@ -1,4 +1,4 @@
-package com.vpdev.oop.Test.threat;
+package com.vpdev.oop.test.threat;
 
 public class Kassa {
     @Override

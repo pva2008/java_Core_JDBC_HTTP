@@ -1,4 +1,4 @@
-package com.vpdev.oop.Test;
+package com.vpdev.oop.test;
 
 public class inheritanceTest {
     public static void main(String[] args) {

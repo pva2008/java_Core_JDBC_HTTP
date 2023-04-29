@@ -1,7 +1,6 @@
-package com.vpdev.oop.Test;
+package com.vpdev.oop.test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class GenericsTest {

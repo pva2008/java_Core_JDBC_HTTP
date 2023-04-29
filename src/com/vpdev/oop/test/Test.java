@@ -1,8 +1,4 @@
-package com.vpdev.oop.Test;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+package com.vpdev.oop.test;
 
 public class Test {
     public static void main(String[] args) {
