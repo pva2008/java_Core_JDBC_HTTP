@@ -40,7 +40,7 @@ public class JdbcRunner {
     private static List<Long> getFlightsBetween(LocalDateTime start, LocalDateTime end) throws SQLException {
         String sql = """
                 SELECT id
-                FROM flight
+                FROM flight_repository.flight_storage.flight
                 WHERE departure_date BETWEEN ? AND ?
                 """;
         List<Long> result = new ArrayList<>();
@@ -68,7 +68,7 @@ public class JdbcRunner {
     private static List<Long> getTicketsByFlightId(Long flightId) throws SQLException {
         String sql = """
                 SELECT id
-                FROM ticket
+                FROM flight_repository.flight_storage.ticket
                 WHERE flight_id = ?
                 """;
         List<Long> result = new ArrayList<>();
