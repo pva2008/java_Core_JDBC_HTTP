@@ -1,49 +1,90 @@
 package com.vpdev.jdbc.starter;
 
 import com.vpdev.jdbc.starter.util.ConnectionManager;
-import org.postgresql.Driver;
 
 import java.sql.*;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class JdbcRunner {
+
     public static void main(String[] args) throws SQLException {
-        Class<Driver> driverClass = Driver.class;
-        String sql = """
-                INSERT INTO flight_repository.public.info(data)
-                VALUES 
-                ('autogen'),
-                ('autogen'),
-                ('autogen');
-                                
-                              
-                """;
-
-        try (Connection connection = ConnectionManager.open();
-             var statement = connection.createStatement()) {
-            // System.out.println(connection.getSchema());
-            // System.out.println(connection.getTransactionIsolation());
-            var executeResult = statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            while (generatedKeys.next()) {
-                System.out.println(generatedKeys.getLong("id"));
-            }
-            // System.out.println(executeResult.);
-//            while (executeResult.next())
-//            {
-//                System.out.println(executeResult.getLong("id"));
-//                System.out.println(executeResult.getString("passenger_no"));
-//                System.out.println(executeResult.getBigDecimal("cost"));
-//                System.out.println("-----------------");
-//            }
-            // System.out.println(statement.getUpdateCount());
-
-        }
-        // System.out.println(Driver.class);
-
-
+//        Long flightId = 2L;
+//        var result = getTicketsByFlightId(flightId);
+//        System.out.println(result);
+//        var result = getFlightsBetween(LocalDate.of(2020, 1, 1).atStartOfDay(), LocalDateTime.now());
+//        System.out.println(result);
+        checkMetaData();
     }
 
+    private static void checkMetaData() throws SQLException {
+        try (var connection = ConnectionManager.open()) {
+            var metaData = connection.getMetaData();
+            var catalogs = metaData.getCatalogs();
+            while (catalogs.next()) {
+                var catalog = catalogs.getString(1);
+                var schemas = metaData.getSchemas();
+                while (schemas.next()) {
+                    var schema = schemas.getString("TABLE_SCHEM");
+                    var tables = metaData.getTables(catalog, schema, "%", new String[]{"TABLE"});
+                    if (schema.equals("public")) {
+                        while (tables.next()) {
+                            System.out.println(tables.getString("TABLE_NAME"));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static List<Long> getFlightsBetween(LocalDateTime start, LocalDateTime end) throws SQLException {
+        String sql = """
+                SELECT id
+                FROM flight
+                WHERE departure_date BETWEEN ? AND ?
+                """;
+        List<Long> result = new ArrayList<>();
+        try (var connection = ConnectionManager.open();
+             var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setFetchSize(50);
+            preparedStatement.setQueryTimeout(10);
+            preparedStatement.setMaxRows(100);
+
+            System.out.println(preparedStatement);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(start));
+            System.out.println(preparedStatement);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(end));
+            System.out.println(preparedStatement);
+
+            var resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                result.add(resultSet.getLong("id"));
+            }
+        }
+
+        return result;
+    }
+
+    private static List<Long> getTicketsByFlightId(Long flightId) throws SQLException {
+        String sql = """
+                SELECT id
+                FROM ticket
+                WHERE flight_id = ?
+                """;
+        List<Long> result = new ArrayList<>();
+        try (var connection = ConnectionManager.open();
+             var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setLong(1, flightId);
+
+            var resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+//                result.add(resultSet.getLong("id"));
+                result.add(resultSet.getObject("id", Long.class)); // NULL safe
+            }
+        }
+
+        return result;
+    }
 }
+
+
