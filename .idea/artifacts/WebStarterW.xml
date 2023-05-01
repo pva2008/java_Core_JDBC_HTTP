@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WebStarterW">
+    <output-path>$PROJECT_DIR$/out/artifacts/WebStarterW</output-path>
+    <root id="archive" name="WebStarterW.war">
+      <element id="artifact" artifact-name="WebStarterE" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/postgresql-42.6.0.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
